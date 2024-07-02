@@ -82,4 +82,3 @@ echo "Database, web server, user, files, backup, and sudo setup completed succes
 # Create root flags
 echo "LNBTI{Pr0_H4ck3r!}" | sudo tee /root/root_flag.txt
 echo "Congratulations on pwning the machine! Proud of you ;) - dest1ny" | sudo tee /root/readme.txt
-

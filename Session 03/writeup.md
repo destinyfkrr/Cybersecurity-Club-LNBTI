@@ -1,4 +1,4 @@
-### Session : Attacking Common Services
+### Session : Attacking Common Services and Network Exploitation II
 
 ![logo](assets/image.png)
 
