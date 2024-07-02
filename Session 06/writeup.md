@@ -3,18 +3,23 @@
 ![logo](assets/image.png)
 
 We ran an `nmap` scan as usual to check the open ports in this machine before attacking :
+
 ![Image1](assets/image1.png)
 
 Since we saw that port 80 was open, We ran a Gobuster scan to look for any hidden directories so we can visit it. We were able to see two new directories as `/news` and `/backup`.
+
 ![Image2](assets/image2.png)
 
 While visiting the `/news` directory from the web browser, we were able to see a `news.pdf` file. It was an article about *MD5 Hashing*. Since it didn't contain any usefull information, we looked into the other directories :
+
 ![Image3](assets/image3.png)
 
 We visited the `/backup` directory and was able to see a `backup.txt` file:
+
 ![Image4](assets/image4.png)
 
 While reading it, we were able to see that it was a mysql Dump and contained some credentials that could use to login to the `Mysql service` on port 3306 we found from the nmap scan :
+
 ![Image5](assets/image5.png)
 
 We used the below command to connect to the `hareen` with the password `mylifemyrules`
@@ -75,9 +80,11 @@ We saved it into our local machine using the built in `nano` text editor in linu
 ```
 
 Pasted the hashes and `CTRL+X` to exit and press `y` to save and exit :
+
 ![Image7](assets/image7.png)
 
 Because we don't know the hashing algorithm of these hashes, we got one hash and pasted into the [Hash-Identifier](https://hashes.com/en/tools/hash_identifier) and was able to see that this was hashed using `MD5`:
+
 ![Image8](assets/image8.png)
 
 We used `John The Ripper` to crack the hashes using the wordlist *Rockyou.txt*. And was able to crack the hashes of the users: 
@@ -106,6 +113,7 @@ ssh marc@<machine_ip>
 ![Image10](assets/image10.png)
 
 We ran Linpeas and was able to see that we could run `nano` binary as sudo :
+
 ![Image11](assets/image11.png)
 
 Looking for payloads in the GFTO Bins, We found that we can abuse that to elevate our privileges :

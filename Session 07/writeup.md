@@ -72,14 +72,17 @@ Starting gobuster in directory enumeration mode
 ```
 
 We visited the `/development` directory and was able to see a `dump.txt` file:
+
 ![Image2](assets/image2.png)
 
 While reading it, we were able to see that it was a MySQL dump and contained some credentials. However, since we didn't have any MySQL ports open, we couldn't use it yet.
+
 ![Image3](assets/image3.png)
 
 ### Samba
 
 We then used those credentials to access the SMB Port, We used `smbclient` to view the available shares and was able to use the credentials we found earlier and access .
+
 ```
 ┌──(dest1ny㉿kali-linux-2022-2)-[~]
 └─$ smbclient -L //45.33.55.121 -U chami 
@@ -93,10 +96,12 @@ Password for [WORKGROUP\chami]:
         IPC$            IPC       IPC Service (localhost server (Samba, Ubuntu))
 ```
 
-We then connected to the smb share `LNBTI` as the user `chami` using the below command. We were then able to find a `backup.txt` file. We used the `get` command again and downloaded the file to our local machine and exited the service.:
+We then connected to the smb share `LNBTI` as the user `chami` using the below command. We were then able to find a `backup.txt` file. We used the `get` command again and downloaded the file to our local machine and exited the service.
+
 ![Image4](assets/image4.png)
 
 We then again used the `cat` command to see the contents inside the file, And we were able to get the password of the user `chami` . so we used ssh to login into chami  :
+
 ```
 ┌──(dest1ny㉿kali-linux-2022-2)-[~]
 └─$ cat backup.txt 
@@ -116,7 +121,7 @@ chami@localhost:~$ find / -name "findmeifucan.txt" 2>/dev/null
 /home/chami/.backup/findmeifucan.txt
 ```
 
- Here's a breakdown of the command `find / -name "findmeifucan.txt" 2>/dev/null`:
+Here's a breakdown of the command `find / -name "findmeifucan.txt" 2>/dev/null`:
 
 1. **`find`**: This is the command used for searching files and directories within a specified directory hierarchy.
 
@@ -135,9 +140,11 @@ LNBTI{G00d_j0b_f1nd1ng_m3}
 
 ### Privilege Escalation
 We checked the active ports using the command `ss -tuln` and were able to see that port 3306 (MySQL) is open locally (You can find this using Linpeas too).
+
 ![Image6](assets/image6.png)
 
 We connected to the mysql service using the username `root` and password `password` and was able to grab the flag and the password of the root :
+
 ```mysql
 chami@localhost:~$ mysql -u root -p                                
 Enter password:                                                     

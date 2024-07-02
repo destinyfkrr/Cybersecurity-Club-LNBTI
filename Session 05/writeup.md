@@ -5,41 +5,51 @@
 ### Recon
 
 We ran an `nmap` scan as usual to check the open ports in this machine before attacking :
+
 ![Image1](assets/image1.png)
+
 To enumerate Port 80, we used a web browser and visited the ip address of the machine and was able to see a website:
 
 ![Image2](assets/image2.png)
 
 We couldn't find anything interesting there so we bruteforced for directories using `Gobuster` tool to find any hidden directories that can be useful and was able to find a directory named `/news` :
+
 ![Image3](assets/image3.png)
 
 We then visited that directory `/news` and was able to see a `pdf` file :
+
 ![Image4](assets/image4.png)
 
 ### Exploitation
 
 We downloaded it to our machine to see the contents of it. (I used the `wget` command here to download the file to my machine using the command line):
+
 ![Image5](assets/image5.png)
 
 We were able to see that this file was password protected. Since we didn't have any passwords, We had no other option but to crack the password :
+
 ![Image6](assets/image6.png)
 
 We used `John The Ripper`s `pdf2john` module to convert our file into a hash:
+
 ![Image7](assets/image7.png)
 
 Then we cracked the hash using `John` and the `rockyou.txt` password list and was able to find the password of the pdf file:
+
 ![Image8](assets/image8.png)
 
 We were then able to see the flag that was hidden inside the PDF file:
+
 ![Image9](assets/image9.png)
 
 We used the `ssh hareen@<machine_ip>` and as the password we used the same `superman` password that we got after cracking the pdf hash and we were able to login to the machine and grab the user flag : ( This step showed a Password reuse where we use the same password for all of our things ;) )
+
 ![Image10](assets/image10.png)
 
 ### Privilege Escalation
 We ran the `linpeas.sh` binary and was able to find that `/bin/bash` had `SUID` privileges. We researched about that and was able to find this [Video](https://www.youtube.com/watch?v=WgTL7KM44YQ) that explains how to exploit the `bash` binary using the `-p` flag :
-![Image11](assets/image11.png)
 
+![Image11](assets/image11.png)
 
 We also was able to find a payload in [GTFIO Bins](https://gtfobins.github.io/gtfobins/bash/#suid)
 

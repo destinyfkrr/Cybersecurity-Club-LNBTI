@@ -2,7 +2,6 @@
 
 ![logo](assets/image.png)
 
-
 First we used `ssh` to login into the machine and was able to see our first flag, so we used the `cat` command to view the content inside the flag :
 
 ```

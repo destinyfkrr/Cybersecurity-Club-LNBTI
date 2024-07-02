@@ -21,12 +21,15 @@ john
 ```
 
 Then we used the `ls` command to look inside our current directory and found the `user.txt`(user flag) and another file named `mail.txt`. 
+
 ![Image1](assets/image1.png)
 
 We submitted the user flag to the TryHackme.
+
 ![Image2](assets/image2.png)
 
 We then used the `cat` command to look inside the `mail.txt` and was able to find a mail from the system admin that contained the password of the `root` user. 
+
 ```
 $ cat mail.txt
 
@@ -43,6 +46,7 @@ LNBTI Admin
 
 We then used the `su` command to change the switch user to `root` .
 Then we were accessing the `root` users shell. We then went to the `/root` directory using the `cd` command and was able to `cat` the root flag and submit to TryHackMe.
+
 ![Image3](assets/image3.png)
 
 ![Image4](assets/image4.png)
@@ -63,7 +67,6 @@ We went to our Kali Linux Vm as it had `nmap` pre installed (Note that you can i
 We were able to find that Port 22 was running SSH and there was a web server running on port 80. Looking further into the output. We were able to find the service was a Apache webserver with it's version. 
 
 ![Image5](assets/image5.png)
-
 
 So we copied it and pasted to Tryhackme and finally for the final question we inserted the answer as `22` as the ssh was running on that port (and it is the default port for ssh).
 

@@ -66,10 +66,13 @@ Starting gobuster in directory enumeration mode
 ```
 
 We then visited that directory `/news` and was able to see a `.txt` file :
+
 ![Image2](assets/image2.png)
 
 We opened that text file and was able to see a message : 
+
 ![Image3](assets/image3.png)
+
 ```
 Dear hareen, Due to a recent cyberattack to our company, our company database got leaked. I was able to see that your password was gymislife. Please change it asap to avoid any kids hacking us! - Admin
 ```
@@ -77,6 +80,7 @@ Dear hareen, Due to a recent cyberattack to our company, our company database go
 We found some Credentials for the `mysql` service to login - `hareen:gymislife`
 
 We used the below commands to connect to the `MySQL` service on the machine and see the contents of the tables and grab the data available :
+
 ```
 mysql -h 45.79.77.201 -u hareen -p
 show databases;
@@ -86,7 +90,9 @@ exit;
 ```
 
 ![Image4](assets/image4.png)
+
 We were able to see 4 credentials we can use to login to the machine :
+
 ```mysql
 select * from credentials;
 
@@ -101,6 +107,7 @@ select * from credentials;
 ```
 
 We tried all the credentials and was successful with the login `chami:ilovepuppies` to login to the machine :
+
 ```
 ssh chami@{Machine_IP}
 ```
@@ -122,6 +129,7 @@ LNBTI{G00d_j0b_f1nd1ng_m3}
 
 Optional :
 We just checked what we have inside the hidden `.backup` directory using the `ls -la` command. We were able to see lots of random text files inside the directory. We were able to find our `backup.txt` file fast because we used the `find` command.
+
 ![Image6](assets/image6.png)
 
 ### Privilege Escalation
@@ -133,12 +141,14 @@ Note : We use the `sudo` command to do the actions of the root. It's like forcin
 We were able to see that `/bin/bash` can be run as sudo for the user `chami` :
 
 ![Image7](assets/image7.png)
+
 We went to the https://gtfobins.github.io/gtfobins/bash/#shell and was able to see a exploit string that we can use to escalate our privileges to root :
 
-![[Screenshot 2024-01-06 at 11.42.13 PM.png]]
+![Image8](assets/image8.png)
 
 We used the command and was able to access the `root` account and go to the `/root` directory and grab the `root` flag.
-![Image8](assets/image8.png)
+
+![Image9](assets/image9.png)
 
 ---
 

@@ -46,7 +46,9 @@ We first connected to ftp using the command `ftp {machine_ip}` and logged in as 
 After logging in, we were able to see a file named `note.txt`. So we downloaded it to our local machine using the `get` command and exited the `ftp` service.
 
 ![Image1](assets/image1.png)
+
 We then used the `cat` command to read the contents inside the file and was able to see this note:
+
 ```
 ┌──(dest1ny㉿kali-linux-2022-2)-[/tmp/hehe]
 └─$ cat note.txt 
@@ -54,8 +56,11 @@ Why are you keep forgetting your Samba share credentials chami? use the password
 ```
 
 We were able to see a username called `chami` and a password called `sambaisfun`.
+
 ### Samba
+
 We then enumerated the available samba shares for the user `Chami` using the below command and was able to see a share named `LNBTI`.
+
 ```
 ┌──(dest1ny㉿kali-linux-2022-2)-[/tmp/hehe]
 └─$ smbclient -L //50.116.12.218 -U chami
@@ -71,14 +76,17 @@ IPC$            IPC       IPC Service (localhost server (Samba, Ubuntu))
 ```
 
 We then connected to the smb share `LNBTI` as the user `chami` using the below command:
+
 ```
 smbclient //50.116.12.218/LNBTI -U chami
 ```
 
 We were then able to find a `password.txt` file. We used the `get` command again and downloaded the file to our local machine and exited the service.
+
 ![Image2](assets/image2.png)
 
 We then again used the `cat` command to see the contents inside the file.
+
 ```
 ┌──(dest1ny㉿kali-linux-2022-2)-[/tmp/hehe]
 └─$ cat password.txt 
@@ -86,23 +94,27 @@ Chami, I resetted your account password again to 'ilovechocolates' as you keep f
 ```
 
 We were able to get the password of the user `chami` . so we used ssh to login into chami using the below command :
+
 ```
 ssh chami@{MACHINE_IP}
 ```
 
 We were then able to grab the user flag:
+
 ```
 chami@localhost:~$ cat user_flag.txt 
 LNBTI{F1nally_Y0u_f0und_m3}
 ```
 
 Looking more into the directory using the `ls` command, we were able to find a `mail.txt` and it had the password of the root user. (The root user in linux is like the Administrator user in Windows). 
+
 ```
 chami@localhost:~$ cat mail.txt 
 Chami, you know something? Our admin loves the batman series, i bruteforced his password and was able to find that his password is 'iLoveBatMan00##' . Pretty stupid isn't it? - Destiny
 ```
 
 We were able to use the `su` command and switched into the `root` user and grab the root flag:
+
 ```
 chami@localhost:~$ su root
 Password: 
