@@ -41,5 +41,5 @@
 
 You are now ready to use the VM for your CTF challenges. Share the IP address with everyone, and they can start enumerating and attacking it, submitting their answers and flags to the private TryHackMe room. As the CTF host, you can publicly display the scoreboard so that everyone can view it and compete against each other.
 
-Follow me on socials : https://allmylinks.com/iamdestiny
-Cybersecurity Club : https://www.linkedin.com/company/ctflnbti/
+- Follow me on socials : https://allmylinks.com/iamdestiny
+- Cybersecurity Club : https://www.linkedin.com/company/ctflnbti/
